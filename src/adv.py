@@ -1,5 +1,31 @@
 from room import Room
 from player import Player
+
+# import only system from os 
+from os import system, name 
+  
+# import sleep to show output for some time period 
+from time import sleep 
+  
+# define our clear function 
+def clear(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear') 
+  
+# print out some text 
+print('___________\n'*10) 
+  
+# sleep for 2 seconds after printing output 
+sleep(2) 
+  
+# now call function we defined above 
+clear() 
 # Declare all the rooms
 
 room = {
@@ -32,14 +58,93 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+room['outside'].n_ton = 'foyer'
+room['foyer'].s_ton = 'outside'
+room['foyer'].n_ton = 'overlook'
+room['foyer'].e_ton = 'narrow'
+room['overlook'].s_ton = 'foyer'
+room['narrow'].w_ton = 'foyer'
+room['narrow'].n_ton = 'treasure'
+room['treasure'].s_ton = 'narrow'
+
+room['outside'].items = " rock stick "
+room['foyer'].items = " photo painting "
+room['overlook'].items = " plant "
+room['treasure'].items = " gold diamond ruby emerald "
+
 #
 # Main
 #
-
+def take(item):
+    if " "+item+" " in room[player1.room].items: 
+        room[player1.room].removeitem(item)
+        player1.additem(item)
+    else:
+        print(item + " not there")
+    return item
+def drop(item):
+    if " "+item+" " in player1.items: 
+        room[player1.room].additem(item)
+        player1.removeitem(item)
+    else:
+        print("You don't have "+item)
+    return item
+def com(first):
+    if len(first) == 0:
+        first = 'x'
+    com = first.split()
+    first = com[0]
+    if len(com) > 1:
+        second = com[1]
+        if first == 'drop':
+            drop(second)
+        elif first == 'take' or first == 'get':
+            take(second)
+        else:
+            print("bad input")
+    elif first == 'n':
+         try:
+             x=room[player1.room].n_to
+             player1.room = room[player1.room].n_ton
+             print(f'new room is: {player1.room}')
+         except:
+             print("You can't go that way")
+    elif first == 'e':
+         try:
+             x=room[player1.room].e_to
+             player1.room = room[player1.room].e_ton
+             print(f'new room is: {player1.room}')
+         except:
+             print("You can't go that way")
+    elif first == 's':
+         try:
+             x=room[player1.room].s_to
+             player1.room = room[player1.room].s_ton
+             print(f'new room is: {player1.room}')
+         except:
+             print("You can't go that way")
+    elif first == 'w':
+         try:
+             x=room[player1.room].w_to
+             player1.room = room[player1.room].w_ton
+             print(f'new room is: {player1.room}')
+         except:
+             print("You can't go that way")
+    elif first == 'q':
+          exit()
+    else:
+          print("\nPlease use one of direction commands: n e w s")
+          print("Or one of the commands: take get drop")
+          print("followed by an available item to take or drop")
+          print("Or to quit use: q")
+    return first 
 # Make a new player object that is currently in the 'outside' room.
-name=input("What's your name? ")
-player1=Player(Player.getname(Player,name),'outside')
-print(player1)
+nameask=input("What's your name? ")
+player1=Player(Player.getname(Player,nameask),'outside')
+com('x')
+print(f'\nYou are at {room[player1.room].name}\n')
+print(room[player1.room].name," now has: ",room[player1.room].items)
+print(player1.name," now has: ",player1.items,'\n')
 
 # Write a loop that:
 #
@@ -52,10 +157,9 @@ print(player1)
 #
 # If the user enters "q", quit the game.
 while True:
-    print('\t',room[player1.room].name,'\n',room[player1.room].description,'\n')
-    room[player1.room].additem('rock')
-    print('\n','which now contains\n',room[player1.room].items,'\n')
-    room[player1.room].removeitem('rock')
-    print('\n','which now contains\n',room[player1.room].items,'\n')
-    break
+    resp = input("Enter a command: ")
+    clear()
+    com(resp)
+    print('\n',room[player1.room].name," now has: ",room[player1.room].items)
+    print(player1.name," now has: ",player1.items)
 
