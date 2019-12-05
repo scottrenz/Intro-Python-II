@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -21,7 +21,6 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -38,6 +37,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+name=input("What's your name? ")
+player1=Player(Player.getname(Player,name),'outside')
+print(player1)
 
 # Write a loop that:
 #
@@ -49,3 +51,11 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+while True:
+    print('\t',room[player1.room].name,'\n',room[player1.room].description,'\n')
+    room[player1.room].additem('rock')
+    print('\n','which now contains\n',room[player1.room].items,'\n')
+    room[player1.room].removeitem('rock')
+    print('\n','which now contains\n',room[player1.room].items,'\n')
+    break
+
