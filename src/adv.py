@@ -6,7 +6,7 @@ from os import system, name
   
 # import sleep to show output for some time period 
 from time import sleep 
-  
+times = 0  
 # define our clear function 
 def clear(): 
   
@@ -78,13 +78,13 @@ room['treasure'].items = " gold diamond ruby emerald "
 def take(item):
     if " "+item+" " in room[player1.room].items: 
         room[player1.room].removeitem(item)
-        player1.additem(item)
+        player1.additem(" "+item+" ")
     else:
         print(item + " not there")
     return item
 def drop(item):
     if " "+item+" " in player1.items: 
-        room[player1.room].additem(item)
+        room[player1.room].additem(" "+item+" ")
         player1.removeitem(item)
     else:
         print("You don't have "+item)
@@ -92,6 +92,7 @@ def drop(item):
 def com(first):
     if len(first) == 0:
         first = 'x'
+    first = first.lower()
     com = first.split()
     first = com[0]
     if len(com) > 1:
@@ -108,38 +109,61 @@ def com(first):
              player1.room = room[player1.room].n_ton
              print(f'new room is: {player1.room}')
          except:
-             print("You can't go that way")
+             print(f"{player1.name}, you can't go North")
     elif first == 'e':
          try:
              second=room[player1.room].e_to
              player1.room = room[player1.room].e_ton
              print(f'new room is: {player1.room}')
          except:
-             print("You can't go that way")
+             print(f"{player1.name}, you can't go East")
     elif first == 's':
          try:
              second=room[player1.room].s_to
              player1.room = room[player1.room].s_ton
              print(f'new room is: {player1.room}')
          except:
-             print("You can't go that way")
+             print(f"{player1.name}, you can't go South")
     elif first == 'w':
          try:
              second=room[player1.room].w_to
              player1.room = room[player1.room].w_ton
              print(f'new room is: {player1.room}')
          except:
-             print("You can't go that way")
+             print(f"{player1.name}, you can't go West")
     elif first == 'q':
-          exit()
+        print(f'{player1.name}, you entered {times} commands')
+        exit()
     else:
           print("\nPlease use one of direction commands: n e w s")
           print("Or one of the commands: take get drop")
           print("followed by an available item to take or drop")
           print("Or to quit use: q")
-    return first 
+          print("Goal: plant in foyer, bat at outside, ball in narrow, stick at overlook, rock at treasure")
+    return first
+def goal():
+#    print(f'outside: {room["outside"].items}')
+#    print(f'treasure: {room["treasure"].items}')
+#    print(f'foyer: {room["foyer"].items}')
+#    print(f'overlook: {room["overlook"].items}')
+#    print(f'narrow: {room["narrow"].items}')
+    if "plant" != room['foyer'].items.replace(" ","",999):
+        return 
+    if "bat" != room['outside'].items.replace(" ","",999):
+        return 
+    if "ball" != room['narrow'].items.replace(" ","",999):
+        return 
+    if "stick" != room['overlook'].items.replace(" ","",999):
+        return 
+    if "rock" != room['treasure'].items.replace(" ","",999):
+        return 
+    print(f'Congratulations, {player1.name}, you entered {times} commands')
+    exit()
+     
 # Make a new player object that is currently in the 'outside' room.
-nameask=input("What's your name? ")
+nameask=' '
+while not nameask.isalpha() or nameask.replace(' ','',999) == '':
+    nameask=input("What's your name? ")
 player1=Player(Player.getname(Player,nameask),'outside')
 com('x')
 print(f'\nYou are at {room[player1.room].name}\n')
@@ -156,10 +180,12 @@ print(player1.name," now has: ",player1.items,'\n')
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+times = 0
 while True:
     resp = input("Enter a command: ")
+    times +=1
     clear()
     com(resp)
     print('\n',room[player1.room].name," now has: ",room[player1.room].items)
     print(player1.name," now has: ",player1.items)
-
+    goal()
