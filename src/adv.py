@@ -167,6 +167,7 @@ while not nameask.isalpha() or nameask.replace(' ','',999) == '':
 player1=Player(Player.getname(Player,nameask),'outside')
 com('x')
 print(f'\nYou are at {room[player1.room].name}\n')
+print(f'\n{room[player1.room].description}\n')
 print(room[player1.room].name," now has: ",room[player1.room].items)
 print(player1.name," now has: ",player1.items,'\n')
 
@@ -187,5 +188,6 @@ while True:
     clear()
     com(resp)
     print('\n',room[player1.room].name," now has: ",room[player1.room].items)
+    print(f'\n{room[player1.room].description}\n')
     print(player1.name," now has: ",player1.items)
     goal()
