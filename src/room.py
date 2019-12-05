@@ -7,7 +7,7 @@ class Room:
         self.description = description
         self.items = ''
     def additem(self, item_in):
-        self.items += " " + item_in
+        self.items += " " + item_in + " "
         self.items = self.items.replace("  "," ",99)
         print(f'\n added {item_in} to {self.name}')
         return item_in    

@@ -1,7 +1,7 @@
 
 class Item:
     def __init__(self, name, description):
-        self.name = name
+        self.name = namepip
         self.description = description
         self.items = ''
     def additem(self, item_in):
