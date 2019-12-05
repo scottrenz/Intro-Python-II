@@ -104,28 +104,28 @@ def com(first):
             print("bad input")
     elif first == 'n':
          try:
-             x=room[player1.room].n_to
+             second=room[player1.room].n_to
              player1.room = room[player1.room].n_ton
              print(f'new room is: {player1.room}')
          except:
              print("You can't go that way")
     elif first == 'e':
          try:
-             x=room[player1.room].e_to
+             second=room[player1.room].e_to
              player1.room = room[player1.room].e_ton
              print(f'new room is: {player1.room}')
          except:
              print("You can't go that way")
     elif first == 's':
          try:
-             x=room[player1.room].s_to
+             second=room[player1.room].s_to
              player1.room = room[player1.room].s_ton
              print(f'new room is: {player1.room}')
          except:
              print("You can't go that way")
     elif first == 'w':
          try:
-             x=room[player1.room].w_to
+             second=room[player1.room].w_to
              player1.room = room[player1.room].w_ton
              print(f'new room is: {player1.room}')
          except:

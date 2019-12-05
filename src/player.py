@@ -11,6 +11,7 @@ class Player:
         return name_in
     def additem(self, item_in):
         self.items += " " + item_in + " "
+        self.items = self.items.replace("  "," ",99)
         print(f'\n added {item_in} to {self.name}')
         return item_in    
     def removeitem(self, item_out):
