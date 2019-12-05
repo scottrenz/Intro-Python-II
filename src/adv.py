@@ -6,7 +6,8 @@ from os import system, name
   
 # import sleep to show output for some time period 
 from time import sleep 
-times = 0  
+times = 0
+treasure = False  
 # define our clear function 
 def clear(): 
   
@@ -79,6 +80,10 @@ def take(item):
     if " "+item+" " in room[player1.room].items: 
         room[player1.room].removeitem(item)
         player1.additem(" "+item+" ")
+        global treasure
+        if player1.room == 'treasure' and not treasure:
+            treasure = True
+            print("\nOK, so I lied about the treasure. Sue me.\n")
     else:
         print(item + " not there")
     return item
