@@ -19,3 +19,4 @@ class Player:
         self.items = self.items.replace("  "," ",99)
         print(f'\n removed {item_out} from {self.name}')
         return item_out    
+        
