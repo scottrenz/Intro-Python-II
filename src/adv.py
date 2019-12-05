@@ -95,7 +95,7 @@ def drop(item):
         print("You don't have "+item)
     return item
 def com(first):
-    if len(first) == 0:
+    if len(first.replace(" ","",999)) == 0 or len(first.replace(chr(9),"",999)) == 0:
         first = 'x'
     first = first.lower()
     com = first.split()
