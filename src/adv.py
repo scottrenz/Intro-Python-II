@@ -110,8 +110,7 @@ def com(first):
             print("Bad input, try again")
     elif first == 'n' or first == 'e' or first == 'w' or first == 's':
          try:
-             second = room[player1.room].n_to if first=='n' else room[player1.room].e_to if first=='e'  else room[player1.room].s_to if first=='s' else room[player1.room].w_to
-             player1.room = room[player1.room].n_ton if first=='n' else room[player1.room].e_ton if first=='e' else room[player1.room].s_ton if first=='s' else room[player1.room].w_ton
+             second,player1.room = (room[player1.room].n_to,room[player1.room].n_ton) if first=='n' else (room[player1.room].e_to,room[player1.room].e_ton) if first=='e' else (room[player1.room].w_to,room[player1.room].w_ton) if first=='w' else (room[player1.room].s_to,room[player1.room].s_ton)
              print(f'new room is: {player1.room}')
          except:
              first="North" if first=='n' else "East" if first=='e' else "West" if first=='w' else "South"
