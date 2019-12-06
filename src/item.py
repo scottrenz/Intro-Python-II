@@ -1,14 +1,11 @@
 
-# Implement a class to hold room information. This should have name and
-# description attributes.
-class Room:
+class Item:
     def __init__(self, name, description):
-        self.name = name
+        self.name = namepip
         self.description = description
         self.items = ''
     def additem(self, item_in):
-        self.items += " " + item_in + " "
-        self.items = self.items.replace("  "," ",99)
+        self.items += " " + item_in
         print(f'\n added {item_in} to {self.name}')
         return item_in    
     def removeitem(self, item_out):
