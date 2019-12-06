@@ -119,11 +119,7 @@ def com(first):
         print(f'{player1.name}, you entered {times} commands')
         exit()
     else:
-          print("\nPlease use one of direction commands: n e w s")
-          print("Or one of the commands: take get drop")
-          print("followed by an available item to take or drop")
-          print("Or to quit use: q")
-          print("Goal: plant in foyer, bat at outside, ball in narrow, stick at overlook, rock at treasure")
+          print("\nPlease use one of direction commands: n e w s\nOr one of the commands: take get drop\n  followed by an available item to take or drop\nOr to quit use: q\n\nGoal: plant in foyer, bat at outside, ball in narrow, stick at overlook, rock at treasure")
     return first
 def goal():
 #    print(f'outside: {room["outside"].items}')
@@ -150,10 +146,7 @@ while not nameask.isalpha() or nameask.replace(' ','',999) == '':
     nameask=input("What's your name? ")
 player1=Player(Player.getname(Player,nameask),'outside')
 com('x')
-print(f'\nYou are at {room[player1.room].name}\n')
-print(f'\n{room[player1.room].description}\n')
-print(room[player1.room].name," now has: ",room[player1.room].items)
-print(player1.name," now has: ",player1.items,'\n')
+print(f'\nYou are at {room[player1.room].name}\n\n{room[player1.room].description}\n\n',room[player1.room].name," now has: ",room[player1.room].items,'\n',player1.name," now has: ",player1.items,'\n')
 
 # Write a loop that:
 #
@@ -171,7 +164,5 @@ while True:
     times +=1
     clear()
     com(resp)
-    print('\n',room[player1.room].name," now has: ",room[player1.room].items)
-    print(f'\n{room[player1.room].description}\n')
-    print(player1.name," now has: ",player1.items)
+    print('\n',room[player1.room].name," now has: ",room[player1.room].items,'\n',player1.name," now has: ",player1.items,f'\n\n{ room[player1.room].description}\n')
     goal()
