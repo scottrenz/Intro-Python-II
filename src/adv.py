@@ -95,10 +95,9 @@ def drop(item):
         print("You don't have "+item)
     return item
 def com(first):
-    first = first.replace(chr(9)," ",999)
+    first = first.replace(chr(9)," ",999).lower()
     if len(first.replace(" ","",999)) == 0:
         first = 'x'
-    first = first.lower()
     com = first.split()
     first = com[0]
     if len(com) > 1:
@@ -108,35 +107,15 @@ def com(first):
         elif first == 'take' or first == 'get':
             take(second)
         else:
-            print("bad input")
-    elif first == 'n':
+            print("Bad input, try again")
+    elif first == 'n' or first == 'e' or first == 'w' or first == 's':
          try:
-             second=room[player1.room].n_to
-             player1.room = room[player1.room].n_ton
+             second = room[player1.room].n_to if first=='n' else room[player1.room].e_to if first=='e'  else room[player1.room].s_to if first=='s' else room[player1.room].w_to
+             player1.room = room[player1.room].n_ton if first=='n' else room[player1.room].e_ton if first=='e' else room[player1.room].s_ton if first=='s' else room[player1.room].w_ton
              print(f'new room is: {player1.room}')
          except:
-             print(f"{player1.name}, you can't go North")
-    elif first == 'e':
-         try:
-             second=room[player1.room].e_to
-             player1.room = room[player1.room].e_ton
-             print(f'new room is: {player1.room}')
-         except:
-             print(f"{player1.name}, you can't go East")
-    elif first == 's':
-         try:
-             second=room[player1.room].s_to
-             player1.room = room[player1.room].s_ton
-             print(f'new room is: {player1.room}')
-         except:
-             print(f"{player1.name}, you can't go South")
-    elif first == 'w':
-         try:
-             second=room[player1.room].w_to
-             player1.room = room[player1.room].w_ton
-             print(f'new room is: {player1.room}')
-         except:
-             print(f"{player1.name}, you can't go West")
+             first="North" if first=='n' else "East" if first=='e' else "West" if first=='w' else "South"
+             print(f"{player1.name}, you can't go {first}")
     elif first == 'q':
         print(f'{player1.name}, you entered {times} commands')
         exit()
